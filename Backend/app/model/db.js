@@ -1,14 +1,16 @@
-var mysql = require('mysql2');
+const mysql = require('mysql2');
 
-var con = mysql.createConnection({
+const pool = mysql.createPool({
     host: "localhost",
-    user: ,
-    password: ,
-    database: ,
-    port:
+    user: "root",
+    password: "j34567yulittle",
+    database: "mydb",
+    port: 3306,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
-
-con.connect(function(err){
-
-});
+exports.createUser = (userData, callback) => {
+    pool.query('INSERT INTO createuser SET ?', userData, callback);
+};
