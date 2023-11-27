@@ -4,7 +4,7 @@
   "description": "Back end for Webdev Assignment",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "server.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,6 @@
   "homepage": "https://github.com/Entroshock/Webdev_Assignment_2023#readme",
   "dependencies": {
     "express": "^4.18.2"
-  }
+  },
+  "keywords": []
 }
