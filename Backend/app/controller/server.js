@@ -17,8 +17,9 @@ app.get('/', function (req, res) {
 });
 
 
-app.post('/createAccount', (req, res) => {
+app.post('/register', (req, res) => {
     const userData = req.body;
+    console.log("Received registration data:", req.body); 
     
     // Simple validation (you should enhance this)
     if (!userData.username || !userData.userEmail) {

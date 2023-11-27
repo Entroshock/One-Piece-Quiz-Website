@@ -70,31 +70,27 @@
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-xl-5 col-md-8">
-              <form class="bg-white rounded shadow-5-strong p-5">
+              <form action="http://localhost:8080/register" method="POST" class="bg-white rounded shadow-5-strong p-5">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                  <input type="email" id="form1Example1" class="form-control" />
+                  <input type="email" id="form1Example1" class="form-control" name="userEmail" />
                   <label class="form-label" for="form1Example1">Email</label>
                 </div>
-
+              
                 <!-- Full name input -->
                 <div class="form-outline mb-4">
-                  <input type="email" id="form1Example1" class="form-control" />
-                  <label class="form-label" for="form1Example1">Full name</label>
+                  <input type="text" id="form1Example1" class="form-control" name="username" />
+                  <label class="form-label" for="form1Example1">Username</label>
                 </div>
-
+              
+                <!-- Additional fields for userFirstName and userLastName -->
+              
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                  <input type="password" id="form1Example2" class="form-control" />
+                  <input type="password" id="form1Example2" class="form-control" name="password" />
                   <label class="form-label" for="form1Example2">Password</label>
                 </div>
-
-                <!-- 2 column grid layout for inline styling -->
-                <div class="row mb-4">
-                  <div class="col d-flex justify-content-center">
-                  </div>
-                </div>
-
+              
                 <!-- Submit button -->
                 <button type="submit" class="btn btn-primary btn-block">Create Account</button>
               </form>
