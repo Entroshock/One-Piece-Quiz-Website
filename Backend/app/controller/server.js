@@ -1,6 +1,7 @@
-var express = require("express");
-var http = require("http");
-var path = require("path");
+const express = require("express");
+const http = require("http");
+const path = require("path");
+const db = require('../model/db');// Import db.js
 var app = express();
 
 // Set up static file serving for the Frontend directory
@@ -14,6 +15,24 @@ app.use(express.urlencoded({extended: true}));
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, '../../../Frontend/index.html'));
 });
+
+
+app.post('/createAccount', (req, res) => {
+    const userData = req.body;
+    
+    // Simple validation (you should enhance this)
+    if (!userData.username || !userData.userEmail) {
+        return res.status(400).send('Username and email are required');
+    }
+
+    db.createUser(userData, (err, result) => {
+        if (err) {
+            return res.status(500).send('Error registering new user');
+        }
+        res.status(201).send('User registered successfully');
+    });
+});
+
 
 // Create and start the HTTP server on port 8080
 http.createServer(app).listen(8080, function() {
