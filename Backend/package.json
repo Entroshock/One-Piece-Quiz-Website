@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Back end for Webdev Assignment",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "server.js"
   },
