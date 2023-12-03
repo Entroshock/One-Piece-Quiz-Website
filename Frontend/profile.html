@@ -28,25 +28,22 @@
                                 <div class="e-profile">
                                     <div class="tab-content pt-3">
                                         <div class="tab-pane active">
-                                            <form class="form" novalidate>
+                                            <form class="form" novalidatenaction="http://localhost:8080/login" method="POST">
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="row">
                                                             <div class="col">
                                                                 <div class="form-group">
                                                                     <label>First Name</label>
-                                                                    <input class="form-control" type="text" name="name"
-                                                                        placeholder="John Smith" value="John Smith">
+                                                                    <input class="form-control" type="text" name="userFirstName">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label>Last Name</label>
-                                                                    <input class="form-control" type="text" name="name"
-                                                                        placeholder="John Smith" value="John Smith">
+                                                                    <input class="form-control" type="text" name="userLastName">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label>Username</label>
-                                                                    <input class="form-control" type="text" name="name"
-                                                                        placeholder="John Smith" value="John Smith">
+                                                                    <input class="form-control" type="text" name="userName">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -54,8 +51,7 @@
                                                             <div class="col">
                                                                 <div class="form-group">
                                                                     <label>Email</label>
-                                                                    <input class="form-control" type="text"
-                                                                        placeholder="user@example.com">
+                                                                    <input class="form-control" type="text" name="userEmail">
                                                                 </div>
                                                             </div>
                                                         </div>
