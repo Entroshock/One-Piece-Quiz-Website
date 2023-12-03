@@ -63,7 +63,6 @@ app.post('/createAccount', async (req, res) => {
 app.post('/login', async (req, res) => {
     try {
         const { userEmail, userPw } = req.body;
-        
         // Fetch the user from the database by email
         const user = await db.getUserByEmail(userEmail);
 
