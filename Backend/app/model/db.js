@@ -1,4 +1,5 @@
 import mysql from 'mysql2'
+import bcrypt from 'bcryptjs'
 import dotenv from 'dotenv'
 dotenv.config();
 
@@ -22,10 +23,19 @@ async function queryDatabase() {
 }
 
 //prepared statement
-export async function createAccount(userEmail, userFirstName, userLastName,userName,userPw){
+export async function createAccount(userEmail, userFirstName, userLastName, userName, userPw) {
+    // Hash the password
+    const saltRounds = 10; 
+    const hashedPassword = await bcrypt.hash(userPw, saltRounds);
+
     const [result] = await pool.query(
-        'INSERT INTO createUser(userEmail, userFirstName,userLastName,userName,userPw) VALUES (?,?,?,?,?)',
-        [userEmail, userFirstName, userLastName,userName,userPw])
+        'INSERT INTO createUser (userEmail, userFirstName, userLastName, userName, userPw) VALUES (?, ?, ?, ?, ?)',
+        [userEmail, userFirstName, userLastName, userName, hashedPassword]
+    );
+    return result;
 }
 
- 
+export async function getUserByEmail(email) {
+    const [rows] = await pool.query('SELECT * FROM createUser WHERE userEmail = ?', [email]);
+    return rows[0];
+}
