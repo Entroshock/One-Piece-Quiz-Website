@@ -35,6 +35,7 @@ export async function createAccount(userEmail, userFirstName, userLastName, user
     return result;
 }
 
+//prepared statement for getting the email
 export async function getUserByEmail(email) {
     const [rows] = await pool.query('SELECT * FROM createUser WHERE userEmail = ?', [email]);
     return rows[0];
