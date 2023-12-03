@@ -13,6 +13,8 @@ import { createAccount } from "../model/db.js";
 
 import { getUserByEmail } from "../model/db.js";
 
+import { getUserById } from "../model/db.js";
+
 console.log("database connected");
 
 app.use(express.json());
