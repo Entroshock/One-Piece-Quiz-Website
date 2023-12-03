@@ -44,12 +44,12 @@ export async function getUserByEmail(email) {
 
 export async function getUserById(userId) {
     try {
-        const query = "SELECT * FROM createUser WHERE userId = ?"; // Replace 'users' with your actual user table name
+        const query = "SELECT * FROM createUser WHERE userId = ?";
         const [rows] = await pool.query(query, [userId]);
-        return rows[0]; // Assuming ID is unique and returns only one user
+        return rows[0]; 
     } catch (error) {
         console.error('Error fetching user by ID:', error);
-        throw error; // Rethrow the error to handle it in the calling context
+        throw error; 
     }
 }
 

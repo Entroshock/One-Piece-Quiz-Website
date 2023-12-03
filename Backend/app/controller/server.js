@@ -52,7 +52,7 @@ app.get('/profile', (req,res) => {
 app.get('/api/user', async (req, res) => {
     if (req.session && req.session.user) {
         try {
-            const user = await db.getUserById(req.session.user.id); // Adjust as per your database function
+            const user = await db.getUserById(req.session.user.id); 
             res.json(user); // Send user data as JSON
         } catch (error) {
             console.error(error);
@@ -99,9 +99,6 @@ app.post('/login', async (req, res) => {
         res.status(500).send('Server error');
     }
 });
-
-
-
 
 // Set up static file serving for the Frontend directory
 // This line serves all files in the Frontend directory on the server
