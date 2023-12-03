@@ -17,33 +17,43 @@ import { getUserByEmail } from "../model/db.js";
 console.log("database connected");
 
 
-// Set up static file serving for the Frontend directory
-// This line serves all files in the Frontend directory on the server
-app.use('/', express.static(path.join(__dirname, '../../../Frontend')));
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookie());
 // Route to serve the index.html file
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../../Frontend/index.html'));
+    if (req.session && req.session.user) {
+        // User is logged in, redirect to profile or another page
+        res.redirect('/homepage');
+    } else {
+        // User is not logged in, show the login page
+        res.sendFile(path.join(__dirname, '../../../Frontend/login.html'));
+    }
 });
+
 
 app.get('/createAccount', (req,res) => {
     res.sendFile(path.join(__dirname, '../../../Frontend/createAccount.html'))
 });
 
-app.get('/login', (req,res) => {
-    res.sendFile(path.join(__dirname, '../../../Frontend/login.html'))
+app.get('/homepage', (req,res) => {
+    res.sendFile(path.join(__dirname, '../../../Frontend/index.html'))
+})
+
+app.get('/profile', (req,res) => {
+    res.sendFile(path.join(__dirname, '../../../Frontend/profile.html'))
 })
 //end route
 
 app.use(session({
-    secret: 'your_secret_key', // A secret key for session encoding
-    resave: false,
-    saveUninitialized: true,
+    secret: process.env.SECRET_KEY, // A secret key for session encoding
+    resave: false, //won't resave the session variable if nothing is changed
+    saveUninitialized: false,
     cookie: { secure: false } // Set secure: true if using HTTPS
 }));
+
 
 
 app.post('/createAccount', async (req, res) => {
@@ -53,7 +63,7 @@ app.post('/createAccount', async (req, res) => {
         // Call the createAccount function
         const result = await createAccount(userEmail, userFirstName, userLastName, userName, userPw);
         // Send back a success response or redirect
-        res.redirect("/login")
+        res.redirect("/")
     } catch (error) {
         console.error('Error creating account:', error);
         res.status(500).send('Error creating account');
@@ -69,7 +79,7 @@ app.post('/login', async (req, res) => {
         if (user && await bcrypt.compare(userPw, user.userPw)) {
             // Login success, setting up the user session
             req.session.user = { id: user.id, email: user.userEmail }; // Adjust as per your user object
-            res.redirect('/');
+            res.redirect('/homepage'); // Redirect to the homepage or another appropriate page
         } else {
             // Login failed
             res.status(401).send('Invalid email or password');
@@ -79,6 +89,13 @@ app.post('/login', async (req, res) => {
         res.status(500).send('Server error');
     }
 });
+
+
+
+
+// Set up static file serving for the Frontend directory
+// This line serves all files in the Frontend directory on the server
+app.use('/', express.static(path.join(__dirname, '../../../Frontend')));
 
 // Create and start the HTTP server on port 8080
 http.createServer(app).listen(8080, function() {
