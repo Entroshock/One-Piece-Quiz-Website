@@ -58,7 +58,9 @@ export async function deleteUserById(userId) {
     await pool.query(query, [userId]);
 }
 
-// export async function updateUserProfile(userId, userData) {
-//     const query = "UPDATE createUser SET firstName = ?, lastName = ?, userName = ?, email = ? WHERE id = ?";
-//     await pool.query(query, [userData.userFirstName, userData.userLastName, userData.userName, userData.userEmail, userId]);
-// }
+export async function updateUserProfile(userId, userData) {
+    const query = "UPDATE createUser SET userFirstName = ?, userLastName = ?, userName = ? WHERE userId = ?";
+    console.log("Updating user profile with:", userData.userFirstName);
+    await pool.query(query, [userData.userFirstName, userData.userLastName, userData.userName, userId]);
+}
+

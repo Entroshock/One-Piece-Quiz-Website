@@ -84,7 +84,6 @@ app.post('/api/deleteAccount', async (req, res) => {
 app.post('/api/updateProfile', async (req, res) => {
     if (req.session && req.session.user) {
         try {
-            // Assuming req.body has the fields userFirstName, userLastName, userName, userEmail
             await db.updateUserProfile(req.session.user.id, req.body);
             res.json({ message: 'Profile successfully updated' });
         } catch (error) {
