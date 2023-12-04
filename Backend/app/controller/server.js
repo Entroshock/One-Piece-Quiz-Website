@@ -15,6 +15,8 @@ import { getUserByEmail } from "../model/db.js";
 
 import { getUserById } from "../model/db.js";
 
+import { deleteUserById } from "../model/db.js";
+
 console.log("database connected");
 
 app.use(express.json());
@@ -38,7 +40,6 @@ app.get('/', (req, res) => {
     }
 });
 
-
 app.get('/createAccount', (req,res) => {
     res.sendFile(path.join(__dirname, '../../../Frontend/createAccount.html'))
 });
@@ -56,6 +57,36 @@ app.get('/api/user', async (req, res) => {
         try {
             const user = await db.getUserById(req.session.user.id); 
             res.json(user); // Send user data as JSON
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Server error');
+        }
+    } else {
+        res.status(401).send('Not logged in');
+    }
+});
+
+app.post('/api/deleteAccount', async (req, res) => {
+    if (req.session && req.session.user) {
+        try {
+            await db.deleteUserById(req.session.user.id);
+            req.session.destroy(); // Destroy the session after account deletion
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Server error');
+        }
+    } else {
+        res.status(401).send('Not logged in');
+    }
+});
+
+
+app.post('/api/updateProfile', async (req, res) => {
+    if (req.session && req.session.user) {
+        try {
+            // Assuming req.body has the fields userFirstName, userLastName, userName, userEmail
+            await db.updateUserProfile(req.session.user.id, req.body);
+            res.json({ message: 'Profile successfully updated' });
         } catch (error) {
             console.error(error);
             res.status(500).send('Server error');

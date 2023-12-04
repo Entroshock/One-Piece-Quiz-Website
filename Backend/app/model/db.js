@@ -53,3 +53,12 @@ export async function getUserById(userId) {
     }
 }
 
+export async function deleteUserById(userId) {
+    const query = "DELETE FROM createUser WHERE userId = ?"; // Adjust with your table and column names
+    await pool.query(query, [userId]);
+}
+
+// export async function updateUserProfile(userId, userData) {
+//     const query = "UPDATE createUser SET firstName = ?, lastName = ?, userName = ?, email = ? WHERE id = ?";
+//     await pool.query(query, [userData.userFirstName, userData.userLastName, userData.userName, userData.userEmail, userId]);
+// }
