@@ -59,13 +59,12 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col d-flex justify-content-end">
-                                                        <button class="btn btn-primary" type="submit">Save
-                                                            Changes</button>
+                                                        <button class="btn btn-primary" type="submit" id="updateProfileBtn">Save Changes</button>
                                                         </div>
                                                 </div>
                                             </form>
                                             <script>
-                                                document.getElementById('updateProfileForm').addEventListener('submit', function(event) {
+                                                document.getElementById('updateProfileBtn').addEventListener('submit', function(event) {
                                                     event.preventDefault(); // Prevent the default form submission
                                             
                                                     const formData = new FormData(this);
