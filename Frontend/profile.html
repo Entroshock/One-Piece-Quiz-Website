@@ -28,7 +28,7 @@
                                 <div class="e-profile">
                                     <div class="tab-content pt-3">
                                         <div class="tab-pane active">
-                                            <form class="form" novalidatenaction="http://localhost:8080/login" method="POST" id="updateProfileForm">
+                                            <form class="form" action="http://localhost:8080/login" method="POST" id="updateProfileForm">
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="row">
@@ -64,31 +64,39 @@
                                                 </div>
                                             </form>
                                             <script>
-                                                document.getElementById('updateProfileForm').addEventListener('submit', function(event) {
-                                                    event.preventDefault(); // Prevent the default form submission
-                                            
-                                                    const formData = new FormData(this);
-                                                    fetch('/api/updateProfile', {
-                                                        method: 'POST',
-                                                        body: formData,
-                                                        credentials: 'include'
-                                                    })
-                                                    .then(response => {
-                                                        if (response.ok) {
-                                                            return response.json();
-                                                        }
-                                                        throw new Error('Network response was not ok');
-                                                    })
-                                                    .then(data => {
-                                                        // Handle success - maybe display a success message or redirect
-                                                    })
-                                                    .catch(error => {
-                                                        console.error('Error:', error);
-                                                        // Handle errors here, such as displaying a notification
-                                                    });
-                                                });
-                                            </script>
-                                            
+                                              document.getElementById('updateProfileForm').addEventListener('submit', function(event) {
+                                                  event.preventDefault();
+                                          
+                                                  // Capture form data
+                                                  const formData = new FormData(this);
+                                                  const userData = {};
+                                                  formData.forEach((value, key) => { userData[key] = value; });
+                                          
+                                                  // Send data to server
+                                                  fetch('/api/updateProfile', {
+                                                      method: 'POST',
+                                                      headers: {
+                                                          'Content-Type': 'application/json',
+                                                          'Accept': 'application/json'
+                                                      },
+                                                      body: JSON.stringify(userData),
+                                                      credentials: 'include'
+                                                  })
+                                                  .then(response => {
+                                                      if (!response.ok) {
+                                                          throw new Error('Network response was not ok');
+                                                      }
+                                                      return response.json();
+                                                  })
+                                                  .then(data => {
+                                                      // Handle the response, e.g., display a success message or update the page
+                                                      console.log('Update successful', data);
+                                                  })
+                                                  .catch(error => {
+                                                      console.error('Error:', error);
+                                                  });
+                                              });
+                                          </script>
                                         </div>
                                     </div>
                                 </div>
