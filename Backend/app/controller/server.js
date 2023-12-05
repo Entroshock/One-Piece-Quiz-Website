@@ -17,6 +17,8 @@ import { getUserById } from "../model/db.js";
 
 import { deleteUserById } from "../model/db.js";
 
+import { updateUserProfile } from "../model/db.js";
+
 console.log("database connected");
 
 app.use(express.json());
@@ -82,8 +84,10 @@ app.post('/api/deleteAccount', async (req, res) => {
 
 
 app.post('/api/updateProfile', async (req, res) => {
+    console.log("is this working?")
     if (req.session && req.session.user) {
         try {
+            console.log("will this work?")
             await db.updateUserProfile(req.session.user.id, req.body);
             res.json({ message: 'Profile successfully updated' });
         } catch (error) {
