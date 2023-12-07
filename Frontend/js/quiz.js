@@ -203,12 +203,42 @@ function getStrawHat(answer) {
     return strawHatsMap[answer];
 }
 
+//this Will reveal the Quiz answer API
 function revealAnswer() {
     const result = Object.keys(counters).reduce((a, b) => counters[a] > counters[b] ? a : b);
-    resultElement.textContent = result.toUpperCase();
-    document.getElementById('result').style.display = 'block';
+    resultElement.textContent = result;
+    const endpoint = `/api/${result}`;
+    fetch(endpoint) // Fetch data from the '/api/result' endpoint
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse response as JSON
+        })
+        .then(data => {
+            // Handle the received data, update the resultElement
+            const name = data.name;
+            const age = data.age;
+            const imageUrl = data.imageUrl;
+            const description = data.description;
+            // Example: Displaying the fetched data in the resultElement
+             // Displaying the fetched data in the resultElement
+             resultElement.innerHTML = `
+                <p>Name: ${name}</p>
+                <p>Age: ${age}</p>
+                <h4>${description}</h4>
+                <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="${imageUrl}" alt="${name} Image">
+                </div>
+            `;
+            document.getElementById('result').style.display = 'block';
+        })
+        .catch(error => {
+            console.error('There was a problem fetching the data:', error);
+            // Handle errors or display a message to the user
+        });
 }
 
 revealButton.addEventListener('click', revealAnswer);
+
 
 showQuestion();
