@@ -23,5 +23,11 @@ mySQL Workbench and Server
 ```
 ## Installation
 
-Set up SQL Workbench and server
-create a database called mydb and import the dump provided in the folder
+- Set up SQL Workbench and server
+- create a database called mydb and import the dump provided in the folder provided
+- Extract the folder from the ZIP file
+- Open the folder in vscode
+- cd to the Backend directory
+- in your terminal run "npm run devStart"
+
+
