@@ -19,4 +19,4 @@ mySQL Workbench and Server
 ## Installatiom
 
 Set up SQL Workbench and server
-create a database called 'mydb' and import the dump provided in the folder
+create a database called mydb and import the dump provided in the folder
