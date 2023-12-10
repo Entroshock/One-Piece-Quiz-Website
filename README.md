@@ -14,8 +14,9 @@ npm install bcrypt
 npm install mysql2
 npm install dotenv
 ```
+```
 mySQL Workbench and Server
-
+```
 ## Installatiom
 
 Set up SQL Workbench and server
