@@ -1,4 +1,9 @@
 # Webdev_Assignment_2023
+1. Backend
+   - Alex Tsang / C21751999
+
+2. Frontend
+   - Sean Tighe / C21329431
 
 
 ## Getting Started
@@ -16,7 +21,7 @@ npm install dotenv
 ```
 mySQL Workbench and Server
 ```
-## Installatiom
+## Installation
 
 Set up SQL Workbench and server
 create a database called mydb and import the dump provided in the folder
