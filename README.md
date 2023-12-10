@@ -1,10 +1,10 @@
 # Webdev_Assignment_2023
 
 
-##Getting Started
+## Getting Started
 To get a local copy up and running follow these steps
 
-##Prerequisites
+## Prerequisites
 
 npm
 npm install npm@latest -g
@@ -16,7 +16,7 @@ npm install dotenv
 
 mySQL Workbench and Server
 
-##Installatiom
+## Installatiom
 
 Set up SQL Workbench and server
 create a database called my db and import the dump provided in the folder
