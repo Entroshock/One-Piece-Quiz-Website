@@ -171,12 +171,14 @@ app.post('/api/deleteAccount', async (req, res) => {
         try {
             await db.deleteUserById(req.session.user.id);
             req.session.destroy(); // Destroy the session after account deletion
+            console.log("Account deletion successful");
+            res.status(200).send({ message: 'Account deleted successfully' }); // Send a success response
         } catch (error) {
             console.error(error);
-            res.status(500).send('Server error');
+            res.status(500).send('Server error'); // Send an error response
         }
     } else {
-        res.status(401).send('Not logged in');
+        res.status(401).send('Not logged in'); // Send a response for unauthorized access
     }
 });
 
