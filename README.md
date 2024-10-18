@@ -1,9 +1,9 @@
-# Webdev_Assignment_2023
+# One Piece Fan Quiz Website
 1. Backend
-   - Alex Tsang / C21751999
+   - Alex Tsang
 
 2. Frontend
-   - Sean Tighe / C21329431
+   - Sean Tighe 
 
 
 ## Getting Started
